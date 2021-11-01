@@ -1,0 +1,30 @@
+package br.com.lab.impacta.account.model
+
+import lombok.Data
+import javax.persistence.*
+
+@Data
+@Entity
+class Account (
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long,
+
+    @Column(name = "number")
+    var number: Long,
+
+    @Column(name = "balance")
+    var balance: Double,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id")
+    var customer: Person
+) {
+
+    fun debit (valueOfDebit : Double) : Boolean {
+        if ( this.balance < valueOfDebit) {
+            return false
+        }
+        return true
+    }
+
+}
