@@ -26,6 +26,7 @@ class Account () {
         }
 
         var debitedAmount: Double = this.balance - valueOfDebit
+        this.balance = debitedAmount
 
         return true
     }
